@@ -1,0 +1,113 @@
+stack = []
+
+#List of operations
+selection = """
+        [List Of Keys For Operations]
+     [C] - Create Stack 
+     [A] - Append element to Stack
+     [D] - Remove element on Stack
+     [P] - Peek the top Element of Stack
+     [S] -  Show the Stack Element
+        (Enter 0 to exit program)
+"""
+print(selection) #prints the list of operations
+
+def Create(): #Creates the stack / not really tbh
+    global name
+    while True:
+        name = input("Enter a name: ") #ask the user for the name of the stack desired
+        if len(name) == 0: #checks if the user entered a name
+            print('\nNOTHING WAS ENTERED\n') #prints when user did not enetered a name
+        else:
+            print('\n',name) #prints the name of the
+            print(stack) #prints the stack
+            print(selection)
+            break
+
+
+
+def Add(): #function that adds element to the stack
+   global usr2
+   while True:
+        usr2 = input('Enter An Element: ') #ask the user for the desired element to add to the stack
+        if len(usr2) == 0:
+            print('\nNO ELEMENT WAS ENTERED\n')
+        else:
+            stack.append(usr2) #appends the stack
+            print('\nPushed', usr2,'\n') # prints what element the user enetered
+            print(name) #prints the name of the stack
+            print(stack) #prints the stack
+            print(selection) #prints the operations list
+            break
+
+
+
+
+
+def Remove(): #function that removes element from the stack
+   if len(stack) == 0: #checks if the stack is empty
+       print('ADD AN ELEMENT FIRST\n')
+       print(selection) #prints the operations list
+
+   else:
+       print('Popped',stack[-1],'\n') #prints the popped element
+       stack.pop() #removes the the element at the top of the stack
+       print(name) #prints the name of the stack
+       print(stack) #prints the stack
+       print(selection) #prints the operations list
+
+
+
+
+def Peek():
+    if len(stack) == 0: #checks if the stack is empty
+        print('ADD AN ELEMENT FIRST\n')
+    else:
+        print(stack[-1],'Is on top of the stack') #prints the top element in the stack
+        print('\n',name) #prints the name of the sack
+        print(stack) #prints the stack
+        print(selection) #prints the operations list
+
+
+
+while True: #loops until the user eneters C to create a stack
+    usr = input('Enter An Operation: ') #ask the user for an operation
+    if usr in ['C', 'c']:  #if statement that only accepts strings in the list
+        Create() #calls the create function
+        while True: #loop for operation
+            usr = input('Enter An Operation: ') #ask the user for an operation
+            if usr in ['C','c']: #if statement if the user tries to create a stack if a stack is already created
+                print('\nSTACK ALREADY CREATED\n') #prints stack already created
+            elif usr in ['A','a']: #if statement for add
+                    Add() #calls the add function
+            elif usr in ['D','d']: #if statement for remove
+                Remove() #call the remove function
+            elif usr in ['P','p']: #if statement for peek
+                Peek() #calls the peek function
+            elif usr in ['S','s']: #if statement for printing the stack
+                print('\n',name)
+                print(stack,'\n') #print's the stack
+                print(selection)
+            elif usr == '0': #if user wants to end the program
+                quit()
+
+            else: #if the user enetered keys that are not in the list
+                print(""" 
+       YOU ENETRED AN INVALID KEY\n
+       PLEASE SELECT FROM THE LIST\n
+       """)
+                print(selection)
+    elif usr in ['A','D','P','S','a','d','p','s']: #if user use other operation without a stack
+        print('\nCREATE A STACK FIRST\n')
+
+    elif usr  == '0': #if user wants to end the porgram
+        quit()
+    else: #if the user tries to use othe operation while not creating a stack first
+        print(""" 
+       YOU ENETRED AN INVALID KEY\n
+       PLEASE SELECT FROM THE LIST\n
+       """)
+        print(selection)
+    #Developer: Junell E. Torres
+    #Date of Development: 10/11/2023
+
