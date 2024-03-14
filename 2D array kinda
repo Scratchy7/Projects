@@ -1,0 +1,98 @@
+def bubble_sort(arr, ascending=True):
+    """
+    Sorts the input array using bubble sort algorithm.
+
+    Args:
+    - arr (list): The input list to be sorted.
+    - ascending (bool): A flag indicating whether to sort in ascending (default) or descending order.
+
+    Returns:
+    - list: The sorted list.
+    """
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if ascending:
+                if arr[j] > arr[j+1]:
+                    arr[j], arr[j+1] = arr[j+1], arr[j]
+            else:
+                if arr[j] < arr[j+1]:
+                    arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+def flatten(arr):
+    """
+    Flattens a 2D array into a 1D array.
+
+    Args:
+    - arr (list): The 2D array to be flattened.
+
+    Returns:
+    - list: The flattened 1D array.
+    """
+    return [element for sublist in arr for element in sublist]
+
+# Input for number of rows and columns
+rows = None
+while rows is None:
+    try:
+        rows = int(input("Enter the number of rows for the 2D array: "))
+        if rows <= 0:
+            raise ValueError("Number of rows must be greater than 0.")
+    except ValueError as e:
+        print("Invalid input. Please enter a valid integer greater than 0.")
+
+cols = None
+while cols is None:
+    try:
+        cols = int(input("Enter the number of columns for the 2D array: "))
+        if cols <= 0:
+            raise ValueError("Number of columns must be greater than 0.")
+    except ValueError as e:
+        print("Invalid input. Please enter a valid integer greater than 0.")
+
+# Input for array elements
+arr = []
+for i in range(rows):
+    row = []
+    for j in range(cols):
+        while True:
+            try:
+                element = int(input(f"Enter element for row {i+1}, column {j+1}: "))
+                if element < 0 or element > 100:
+                    raise ValueError("Element must be between 0 and 100.")
+                row.append(element)
+                break
+            except ValueError as e:
+                print("Invalid input. Please enter a valid integer between 0 and 100 for the element.")
+    arr.append(row)
+
+# Display the 2D array
+print("2D Array:")
+for row in arr:
+    print(row)
+
+# Input for sorting order
+ascending = None
+while ascending is None:
+    try:
+        order = input("Enter 'a' for ascending order or 'd' for descending order: ")
+        if order.lower() not in ['a', 'd']:
+            raise ValueError("Invalid input. Please enter 'a' or 'd'.")
+        ascending = order.lower() == 'a'
+    except ValueError as e:
+        print(e)
+
+# Flatten the 2D array
+flat_arr = flatten(arr)
+
+# Sort the flattened array
+sorted_flat_arr = bubble_sort(flat_arr, ascending)
+
+# Convert the sorted 1D array back to a 2D array
+sorted_arr = [sorted_flat_arr[i:i+cols] for i in range(0, len(sorted_flat_arr), cols)]
+
+# Display the sorted 2D array
+print("Sorted array:")
+for row in sorted_arr:
+    print(row)
