@@ -1,3 +1,5 @@
+import math
+
 def bubble_sort(arr, ascending=True):
     """
     Sorts the input array using bubble sort algorithm.
@@ -32,24 +34,19 @@ def flatten(arr):
     """
     return [element for sublist in arr for element in sublist]
 
-# Input for number of rows and columns
-rows = None
-while rows is None:
+# Input for number of elements
+total_elements = None
+while total_elements is None:
     try:
-        rows = int(input("Enter the number of rows for the 2D array: "))
-        if rows <= 0:
-            raise ValueError("Number of rows must be greater than 0.")
+        total_elements = int(input("Enter the total number of elements for the 2D array: "))
+        if total_elements <= 0:
+            raise ValueError("Number of elements must be greater than 0.")
     except ValueError as e:
         print("Invalid input. Please enter a valid integer greater than 0.")
 
-cols = None
-while cols is None:
-    try:
-        cols = int(input("Enter the number of columns for the 2D array: "))
-        if cols <= 0:
-            raise ValueError("Number of columns must be greater than 0.")
-    except ValueError as e:
-        print("Invalid input. Please enter a valid integer greater than 0.")
+# Calculate number of rows and columns
+rows = int(math.sqrt(total_elements))
+cols = total_elements // rows
 
 # Input for array elements
 arr = []
@@ -96,3 +93,4 @@ sorted_arr = [sorted_flat_arr[i:i+cols] for i in range(0, len(sorted_flat_arr), 
 print("Sorted array:")
 for row in sorted_arr:
     print(row)
+
